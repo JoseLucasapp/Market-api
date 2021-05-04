@@ -6,4 +6,5 @@ module.exports = (app)=>{
     app.use('/api', routes);
 
     require('../api/routes/categories')(routes);
+    require('../api/routes/products')(routes);
 }
