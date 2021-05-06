@@ -3,7 +3,8 @@ const {
     getProductById,
     addProduct,
     editProduct,
-    deleteProducts
+    deleteProducts,
+    getProductsByCategory
 }= require('../models/products');
 
 module.exports.getAllProducts = async(req, res)=>{
@@ -57,5 +58,16 @@ module.exports.deleteProducts = async(req, res)=>{
         res.status(200).json();
     }catch(err){
         res.status(500).json();
+    }
+}
+
+module.exports.getProductsByCategory = async(req, res)=>{
+    const {id} = req.params;
+
+    try{
+        const products = await getProductsByCategory(id);
+        res.status(200).json(products.rows);
+    }catch(err){
+        res.status(500).json(err);
     }
 }

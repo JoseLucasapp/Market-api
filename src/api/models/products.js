@@ -10,6 +10,10 @@ const getProductById = async(id)=>{
     return await client.query(`select * from products ${join} where products.id = ${id}`);
 }
 
+const getProductsByCategory = async(id)=>{
+    return await client.query(`select * from products where products.category_id = ${id}`)
+}
+
 const addProduct = async(data)=>{
     return await client.query(`insert into products (product, description, price, unit, category_id) values ('${data.product}', '${data.description}', '${data.price}', '${data.unit}', '${data.category}')`)
 }
@@ -44,5 +48,6 @@ module.exports = {
     getProductById,
     addProduct,
     editProduct,
-    deleteProducts
+    deleteProducts,
+    getProductsByCategory
 }
