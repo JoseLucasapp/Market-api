@@ -7,4 +7,5 @@ module.exports = (app)=>{
     app.post('/products', productsController.addProduct);
     app.put('/products/:id', productsController.editProduct);
     app.delete('/products/:id', productsController.deleteProducts);
+    app.put('/products/:id/buy', productsController.buyProduct);
 }

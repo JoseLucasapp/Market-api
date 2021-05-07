@@ -1,7 +1,8 @@
 const client = require('../../config/dbConnection');
 
 const createCategory = async(data)=>{
-    return await client.query(`insert into category (name) values ('${data.name}')`);
+    const {category} = data;
+    return await client.query(`insert into category (category) values ($1)`,[category]);
 }
 
 const getAllCategories = async()=>{
@@ -9,11 +10,12 @@ const getAllCategories = async()=>{
 }
 
 const editCategory = async(data, id)=>{
-    return await client.query(`update category set ${data.column} = '${data.alter}' where id = ${id}`)
+    const {category} = data;
+    return await client.query(`update category set category = $1 where id = $2`, [category, id])
 }
 
 const removeCategory = async(id)=>{
-    return await client.query(`delete from category where id = ${id}`);
+    return await client.query(`delete from category where id = $1`, [id]);
 }
 
 module.exports = {
