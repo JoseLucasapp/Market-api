@@ -3,8 +3,9 @@ const express = require('express');
 module.exports = (app)=>{
     const routes = express.Router();
 
-    app.use('/api', routes);
+    app.use('/api/', routes);
 
     require('../api/routes/categories')(routes);
     require('../api/routes/products')(routes);
+    require('../api/routes/market')(routes);
 }
