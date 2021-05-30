@@ -7,10 +7,10 @@ const {
 
 module.exports.createCategory = async(req, res)=>{
     const data = req.body;
-
+    const {admin} = req.params;
     try{
-        await createCategory(data);
-        res.status(200).json();
+        const category = await createCategory(admin, data);
+        res.status(200).json(category);
     }catch(err){
         res.status(500).json(err);
     }
@@ -26,23 +26,23 @@ module.exports.getAllCategories = async(req, res)=>{
 }
 
 module.exports.editCategory = async(req, res)=>{
-    const {id} = req.params;
+    const {id, admin} = req.params;
     const data = req.body;
 
     try{
-        await editCategory(data, id);
-        res.status(200).json();
+        const updated = await editCategory(admin,data, id);
+        res.status(200).json(updated);
     }catch(err){
         res.status(500).json(err);
     }
 }
 
 module.exports.removeCategory = async(req, res)=>{
-    const {id} = req.params;
+    const {id, admin} = req.params;
 
     try{
-        await removeCategory(id);
-        res.status(200).json();
+        const deleted = await removeCategory(admin,id);
+        res.status(200).json(deleted);
     }catch(err){
         res.status(500).json(err);
     }

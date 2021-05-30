@@ -3,12 +3,12 @@ const client = require('../../config/dbConnection');
 const {newCode} = require('../helpers/idGenerator');
 
 const getAllProducts = async(marketId)=>{
-    const products = await client.query('select * from products where products.market = $1', [marketId]);
+    const products = await client.query('select * from products inner join category on products.category_id = category.id where products.market = $1', [marketId]);
     const market = await client.query('select name from market where id = $1', [marketId]);
     if(products.rows.length <= 0){
         return 'Market not found';
     }
-
+    (products.rows).map((m)=> m.market = market.rows[0].name);
     return {
         market: market.rows[0].name, products: products.rows
     };
